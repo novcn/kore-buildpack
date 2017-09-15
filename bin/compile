@@ -21,9 +21,9 @@ if [[ ! -f $TARBALL ]] ; then
   error "could not find a kore libary for the '${CF_STACK}' stack."
 fi
 mkdir -p kore
-tar -m --directory kore -zxf $TARBALL
+tar -m --directory ${BUILDPACKS_DIR}/kore -zxf $TARBALL
 
-cd kore
+cd ${BUILDPACKS_DIR}/kore
 make NOTLS=1 PYTHON=0
 sudo make install
 
