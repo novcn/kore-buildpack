@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir>
+
+set -e
+set -o pipefail
+
+BIN_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+BUILD_DIR=$1
+CACHE_DIR=$2
+BUILDPACKS_DIR=$(dirname $(dirname $0))
+
+source ${BIN_DIR}/utils
+
+cd $BUILD_DIR
+
+KORE_VERSION=2.0.0
+TARBALL="${BUILDPACKS_DIR}/vendor/${CF_STACK}/kore-${KORE_VERSION}-release.tar.gz"
+if [[ ! -f $TARBALL ]] ; then
+  ls ${BUILDPACKS_DIR}/vendor/${CF_STACK}
+  error "could not find a kore libary for the '${CF_STACK}' stack."
+fi
+mkdir -p kore
+tar -m --directory kore -zxf $TARBALL
+
+make NOTLS=1 PYTHON=0
+sudo make install
+
+kore
