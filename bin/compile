@@ -26,6 +26,6 @@ tar -m --directory ${BUILDPACKS_DIR}/kore -xvf $TARBALL
 cd ${BUILDPACKS_DIR}/kore/kore
 ls
 make NOTLS=1 PYTHON=0
-sudo make install
+make install
 
 kore
