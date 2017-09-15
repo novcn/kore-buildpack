@@ -3,6 +3,7 @@
 
 set -e
 set -o pipefail
+set -x
 
 BIN_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 BUILD_DIR=$1
@@ -22,6 +23,7 @@ fi
 mkdir -p kore
 tar -m --directory kore -zxf $TARBALL
 
+cd kore
 make NOTLS=1 PYTHON=0
 sudo make install
 
