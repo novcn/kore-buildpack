@@ -20,7 +20,7 @@ if [[ ! -f $TARBALL ]] ; then
   ls ${BUILDPACKS_DIR}/vendor/${CF_STACK}
   error "could not find a kore libary for the '${CF_STACK}' stack."
 fi
-mkdir -p kore
+mkdir -p ${BUILDPACKS_DIR}/kore
 tar -m --directory ${BUILDPACKS_DIR}/kore -zxf $TARBALL
 
 cd ${BUILDPACKS_DIR}/kore
